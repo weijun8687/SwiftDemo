@@ -75,14 +75,33 @@ extension WJTabBarController{
     
     fileprivate func setUpChildControllers(){
         
-        // 在 Bundle 中加载配置的 json
-        // 1.路径  2.加载nadata 3.反序列化转换成数组
-        guard let path = Bundle.main.path(forResource: "main.json", ofType: nil),
-            let data = NSData(contentsOfFile: path),
-            let ary = try? JSONSerialization.jsonObject(with: data as Data, options: []) as! [[String: Any]]
-            else{
+        // 1.获取沙盒路径
+        let docDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let jsonPath = (docDir as NSString).appendingPathComponent("main.json")
+        
+        // 2.加载data
+        var data = NSData(contentsOfFile: jsonPath)
+        
+        // 如果沙盒中没有数据的话,则加载Bundle中的数据
+        if data == nil {
+            let path = Bundle.main.path(forResource: "main.json", ofType: nil)
+            data = NSData(contentsOfFile: path!)
+        }
+        
+        // 反序列化json串
+        guard let ary = try? JSONSerialization.jsonObject(with: data! as Data, options: []) as? [[String: Any]] else{
             return
         }
+        
+
+        // 在 Bundle 中加载配置的 json
+        // 1.路径  2.加载nadata 3.反序列化转换成数组
+//        guard let path = Bundle.main.path(forResource: "main.json", ofType: nil),
+//            let data = NSData(contentsOfFile: path),
+//            let ary = try? JSONSerialization.jsonObject(with: data as Data, options: []) as! [[String: Any]]
+//            else{
+//            return
+//        }
         
         
         
@@ -105,7 +124,7 @@ extension WJTabBarController{
         
         var viewControllerArr = [UIViewController]()
         
-        for dic in ary {
+        for dic in ary! {
             viewControllerArr.append(controller(dic: dic))
         }
         

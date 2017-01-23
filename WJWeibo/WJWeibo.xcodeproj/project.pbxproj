@@ -194,10 +194,10 @@
 		3771FA091E2B584400B71091 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				3771FA0A1E2B584400B71091 /* Model(模型) */,
-				3771FA0B1E2B584400B71091 /* Tools(工具) */,
 				3771FA0C1E2B584400B71091 /* View(视图和控制器) */,
 				3771FA141E2B584400B71091 /* ViewModel(视图模型) */,
+				3771FA0A1E2B584400B71091 /* Model(模型) */,
+				3771FA0B1E2B584400B71091 /* Tools(工具) */,
 			);
 			path = Class;
 			sourceTree = "<group>";

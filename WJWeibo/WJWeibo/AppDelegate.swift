@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.makeKeyAndVisible()
         
+        loadAppInfo()
+        
         return true
     }
 
@@ -45,6 +47,8 @@ extension AppDelegate{
             let docDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
             let jsonPath = (docDir as NSString).appendingPathComponent("main.json")
             data?.write(toFile: jsonPath, atomically: true)
+            
+            print(jsonPath)
             
         }
         
