@@ -50,12 +50,23 @@ class WJBaseViewController: UIViewController {
             navItem.title = title
         }
     }
+}
 
+// MARK:- 访客视图的点击方法
+extension WJBaseViewController{
+    
+    @objc func login(){
+        print("登录方法")
+    }
+    
+    @objc func resigner(){
+        print("注册方法")
+    }
 }
 
 extension WJBaseViewController{
     
-    open func setupUI() {
+    fileprivate func setupUI() {
         
         view.backgroundColor = UIColor.white
         
@@ -73,10 +84,16 @@ extension WJBaseViewController{
         let visitorView = WJVisitorView(frame: view.bounds)
         visitorView.visitorInfo = visitorInfo
         view.insertSubview(visitorView, belowSubview: navBar)
+        
+        visitorView.registerBtn.addTarget(self, action: #selector(resigner), for: .touchUpInside)
+        visitorView.loginBtn.addTarget(self, action: #selector(login), for: .touchUpInside)
+        
+        navItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: .plain, target: self, action: #selector(resigner))
+        navItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: .plain, target: self, action: #selector(login))
     }
     
     //MARK: 设置 tableView
-    private func setupTableView() {
+    open func setupTableView() {
         tableView = UITableView(frame: view.bounds, style: .plain)
         tableView?.backgroundColor = UIColor.brown
         view.insertSubview(tableView!, belowSubview: navBar)

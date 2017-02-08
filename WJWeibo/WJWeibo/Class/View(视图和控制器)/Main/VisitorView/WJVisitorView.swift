@@ -25,6 +25,7 @@ class WJVisitorView: UIView {
             tipLable.text = message
             
             if imageName == "" {
+                startAnimation()
                 return
             }
             
@@ -34,6 +35,12 @@ class WJVisitorView: UIView {
             
         }
     }
+    
+    // 注册按钮
+    var registerBtn: UIButton = UIButton.yw_textButton("注册", fontSize: 16, normalColor: UIColor.orange, highlightedColor: UIColor.black, backgroundImageName: "common_button_white_disable")
+    
+    // 登录按钮
+    var loginBtn: UIButton = UIButton.yw_textButton("登录", fontSize: 16, normalColor: UIColor.orange, highlightedColor: UIColor.black, backgroundImageName: "common_button_white_disable")
     
     
     // 代码调用
@@ -48,6 +55,21 @@ class WJVisitorView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // 启动动画
+    private func startAnimation() {
+        
+        // 设置动画为旋转
+        let anim = CABasicAnimation(keyPath: "transform.rotation")
+        anim.duration = 15.0
+        // 设置动画的旋转角度
+        anim.toValue = M_PI * 2
+        //  一直旋转
+        anim.repeatCount = MAXFLOAT
+        // 动画完成之后是否删除, 如果iconView被释放, 动画会一起被销毁
+        anim.isRemovedOnCompletion = false
+        iconView.layer.add(anim, forKey: nil)
+    }
+    
     // MARK: - 私有控件
     // 背景
     fileprivate lazy var iconView: UIImageView = UIImageView(image: UIImage(named: "visitordiscover_feed_image_smallicon"))
@@ -56,12 +78,6 @@ class WJVisitorView: UIView {
     
     // 中间的提示标签
     fileprivate lazy var tipLable: UILabel = UILabel.yw_label(withText: "关注一些人，回这里看看有什么惊喜关注一些人，回这里看看有什么惊喜", fontSize: 16, color: UIColor.darkGray)
-    
-    // 注册按钮
-    fileprivate lazy var registerBtn: UIButton = UIButton.yw_textButton("注册", fontSize: 16, normalColor: UIColor.orange, highlightedColor: UIColor.black, backgroundImageName: "common_button_white_disable")
-    
-    // 登录按钮
-    fileprivate lazy var loginBtn: UIButton = UIButton.yw_textButton("登录", fontSize: 16, normalColor: UIColor.orange, highlightedColor: UIColor.black, backgroundImageName: "common_button_white_disable")
     
     // 遮罩
     fileprivate lazy var maskIconView: UIImageView = UIImageView(image: UIImage(named: "visitordiscover_feed_mask_smallicon"))

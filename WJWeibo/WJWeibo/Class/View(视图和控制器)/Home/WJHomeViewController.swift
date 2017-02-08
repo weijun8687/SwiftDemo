@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AFNetworking
 
 private let cellID = "cellID"
 
@@ -18,7 +19,7 @@ class WJHomeViewController: WJBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupUI()
+//        setupUI()
     }
 
 
@@ -29,6 +30,22 @@ class WJHomeViewController: WJBaseViewController {
     }
     
     override func loadData() {
+        
+        
+        let urlSring = "https://api.weibo.com/2/statuses/public_timeline.json"
+        let param = ["access_token" : access_token]
+        
+//        WJNetworkManager.shareManager.get(urlSring, parameters: param, progress: nil, success: {(_, json) in
+//            print(json ?? "kjknl")
+//        }) {(_, error) in
+//            
+//            print("网络请求失败 \(error)")
+//        }
+        
+        WJNetworkManager.shareManager.request(URLString: urlSring, parameters: param){(json, isSuccess) in
+            print(json ?? "")
+        }
+        
         
         refreshController?.beginRefreshing()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: {
@@ -70,8 +87,9 @@ extension WJHomeViewController{
 }
 
 extension WJHomeViewController{
-    override func setupUI() {
-        super.setupUI()
+    override func setupTableView() {
+  
+        super.setupTableView()
         
         navItem.leftBarButtonItem = UIBarButtonItem(title: "好友", style: .plain, target: self, action: #selector(showNext))
         

@@ -13,7 +13,7 @@ class ViewController: WJBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupUI()
+//        setupUI()
 
         title = "第\(navigationController?.childViewControllers.count ?? 0)个"
     }
@@ -41,9 +41,9 @@ class ViewController: WJBaseViewController {
 
 extension ViewController{
     
-    override func setupUI() {
-        super.setupUI()
+    override func setupTableView() {
         
+        super.setupTableView()
         // 系统自定义view方法
 //        let navBtn: UIButton = UIButton.yw_textButton("下一个", fontSize: 16, normalColor: UIColor.darkGray, highlightedColor: UIColor.orange)
 //        navBtn.addTarget(self, action: #selector(showNext), for: .touchUpInside)
